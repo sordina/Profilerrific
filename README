@@ -9,10 +9,11 @@ repository listed after `-r`.
 If `-r` revisions are omited, the scripts are run against the working copy.
 
 Recommended workflow:
-	* Create a profiling branch
-	* Create and commit profiling scripts - This must be done before chanegs are made
-	* Make a set of changes that you would like to compare, commit the changes.
-	  - Repeat for each case you wish to compare.
-	* Run: profilerrific -s <scripts> -r <revisions>
-	  - This will generate data in an untracked folder for analysis
-	* Merge the better revision back to master
+
+  * Create a profiling branch
+  * Create and commit profiling scripts
+  * Make a set of changes that you would like to compare, commit the changes.
+    - Repeat for each case you wish to compare.
+  * Run: profilerrific -s <scripts> -r <revisions>
+    - This will generate data in an untracked folder for analysis
+  * Merge the better revision back to master
