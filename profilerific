@@ -8,10 +8,12 @@ function tidy {
 	echo "$@" | sed -e 's/\s*-.*//'
 }
 
-if [[ ! "$*" ]]; then usage; fi
+if [[ ! "$*" ]]; then
+	usage;
+	exit
+fi
 
-while [[ "$1" ]]
-do
+while [[ "$1" ]]; do
 	ARG="$1"
 	shift
 	case "$ARG" in
@@ -24,11 +26,15 @@ done
 echo "Revisions: $revisions"
 echo "Scripts:   $scripts"
 
-for revision in $revisions
-do
+for revision in $revisions; do
 	git checkout -- $revision
-	for script in $scripts
-	do
+	for script in $scripts; do
 		$script
 	done
 done
+
+if [[ ! "$revisions" ]]; then
+	for script in $scripts; do
+		$script
+	done
+fi
