@@ -1,7 +1,7 @@
 
 Profilerrific - A simple Git-based profiling framework
 
-usage: profilerrific -s <script>* [-r <revision>*]
+Usage: profilerrific -s <script>* [-r <revision>*]
 
 Profilerrific runs the scipts listed after `-s` for each revision of the
 repository listed after `-r`.
