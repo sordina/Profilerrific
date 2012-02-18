@@ -1,0 +1,34 @@
+#!/bin/sh
+
+function usage {
+	echo "Usage: profilerrific [-h|--help] -s <script>* [-r <revision>*]"
+}
+
+function tidy {
+	echo "$@" | sed -e 's/\s*-.*//'
+}
+
+if [[ ! "$*" ]]; then usage; fi
+
+while [[ "$1" ]]
+do
+	ARG="$1"
+	shift
+	case "$ARG" in
+	-h) usage; break;;
+	-r) revisions=`tidy "$@"`;;
+	-s) scripts=`  tidy "$@"`;;
+	esac
+done
+
+echo "Revisions: $revisions"
+echo "Scripts:   $scripts"
+
+for revision in $revisions
+do
+	git checkout -- $revision
+	for script in $scripts
+	do
+		$script
+	done
+done
