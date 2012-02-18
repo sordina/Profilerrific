@@ -3,7 +3,9 @@ Profilerrific - A simple Git-based profiling framework
 
 usage: profilerrific -s <script>* [-r <revision>*]
 
-Profilerrific runs the scipts listed after `-s` for each revision of the repository listed after `-r`.
+Profilerrific runs the scipts listed after `-s` for each revision of the
+repository listed after `-r`.
+
 If `-r` revisions are omited, the scripts are run against the working copy.
 
 Recommended workflow:
