@@ -1,19 +1,33 @@
 
 Profilerrific - A simple Git-based profiling framework
 
-Usage: profilerrific [-h|--help] (-s|--scripts) <script>+ [(-r|--revisions) <revision>*] [(-d|--diff) <prefix>] [(-g|--grapher) <grapher script>]
+Synopsis: Often you may wish to profile several incompatible algorithm designs
+          before settling on one and continuing with the development of your
+          program. Profilerrific formalises this process by requiring each
+          choice to be represented by a revision. Profilerrific then runs a
+          profiling suite against each revision, potentially graphing the
+          results with links to diffs between each revision.
 
-Profilerrific runs the scipts listed after `-s` for each revision of the
-repository listed after `-r`.
+Usage: profilerrific
+          [-h|--help]
+          (-s|--scripts) <script>+
+          [(-r|--revisions) <revision>*]
+          [(-d|--diff) <prefix>]
+          [(-g|--grapher) <grapher script>]
 
-If `-r` revisions are omited, the scripts are run against the working copy.
+Options:
+  -h --help      - Show usage information
+  -s --scripts   - List of scripts to perform profiling with
+  -r --revisions - List of revision choices to profile
+  -d --diff      - Prefix to use for outputting inter-revision diff information
+  -g --grapher   - Script to run post-profiling to graph results
 
 Recommended workflow:
 
-  * Create a profiling branch
   * Create and commit profiling scripts
+  * Create a profiling branch
   * Make a set of changes that you would like to compare, commit the changes.
     - Repeat for each case you wish to compare.
   * Run: profilerrific -s <scripts> -r <revisions>
     - This will generate data in an untracked folder for analysis
-  * Merge the better revision back to master
+  * Merge the best revision back to master
