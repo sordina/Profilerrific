@@ -26,6 +26,8 @@ done
 
 current_revision=`git show | head -n 1 | sed -e 's/.* //'`
 
+echo "Current revision is $current_revision"
+
 if [[ "$revisions" ]]; then echo "Revisions: $revisions"; fi
 if [[ "$scripts" ]];   then echo "Scripts:   $scripts";   fi
 
