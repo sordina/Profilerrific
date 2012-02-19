@@ -50,20 +50,23 @@ fi
 # Bring the WC back to where we left off
 git reset --hard $current_revision --
 
-# Graph each revision pair
-if [[ "$grapher" ]]; then
-	for revisionl in $revisions; do
-		for revisionr in $revisions; do
-			if [[ $revisionl -lt $revisionr ]]; then
-				if [[ "$diff" ]]; then
-					echo "Dumping source diff for revisions-range $revisionl..$revisionr"
-					git diff "$revisionl..$revisionr" > ${diff_prefix}diff-$revisionl..$revisionr.diff
-				fi
+for revisionl in $revisions; do
+	for revisionr in $revisions; do
+		if [[ $revisionl -lt $revisionr ]]; then
+
+			# Output a diff of each pair
+			if [[ "$diff" ]]; then
+				echo "Dumping source diff for revisions-range $revisionl..$revisionr"
+				git diff "$revisionl..$revisionr" > ${diff_prefix}diff-$revisionl..$revisionr.diff
+			fi
+
+			# Graph each revision pair
+			if [[ "$grapher" ]]; then
 				for script in $scripts; do
 					echo "Graphing script $script results for revisions $revisionl vs. $revisionr"
 					$grapher $script $revisionl $revisionr
 				done
 			fi
-		done
+		fi
 	done
-fi
+done
