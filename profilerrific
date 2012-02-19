@@ -52,7 +52,7 @@ git reset --hard $current_revision --
 
 for revisionl in $revisions; do
 	for revisionr in $revisions; do
-		if [[ $revisionl -lt $revisionr ]]; then
+		if [[ $revisionl < $revisionr ]]; then
 
 			# Output a diff of each pair
 			if [[ "$diff" ]]; then
