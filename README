@@ -10,8 +10,8 @@ Synopsis: Often you may wish to profile several incompatible algorithm designs
 
 Usage: profilerrific
           [-h|--help]
-          (-s|--scripts) <script>+
-          [(-r|--revisions) <revision>*]
+          [(-s|--scripts) <script>+]
+          [(-r|--revisions) <revision>+]
           [(-d|--diff) <prefix>]
           [(-g|--grapher) <grapher script>]
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 function usage {
-	echo "Usage: profilerrific [-h|--help] (-s|--scripts) <script>* [(-r|--revisions) <revision>*] [(-d|--diff) prefix] [(-g|--grapher) <graphing script>]"
+	echo "Usage: profilerrific [-h|--help] [(-s|--scripts) <script>+] [(-r|--revisions) <revision>+] [(-d|--diff) prefix] [(-g|--grapher) <graphing script>]"
 }
 
 function tidy {
