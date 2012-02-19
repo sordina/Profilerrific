@@ -1,7 +1,7 @@
 #!/bin/sh
 
 function usage {
-	echo "Usage: profilerrific [-h|--help] (-s|--scripts) <script>* [(-r|--revisions) <revision>*] [(-g|--grapher) <graphing script>]"
+	echo "Usage: profilerrific [-h|--help] (-s|--scripts) <script>* [(-r|--revisions) <revision>*] [(-d|--diff) prefix] [(-g|--grapher) <graphing script>]"
 }
 
 function tidy {
@@ -21,6 +21,7 @@ while [[ "$@" ]]; do
 	-r|--revisions) revisions=`tidy "$@"`;;
 	-s|--scripts)   scripts=`  tidy "$@"`;;
 	-g|--grapher)   grapher=`  tidy "$@"`;;
+	-d|--diff)      diff="true"; diff_prefix=`tidy "$@"`;;
 	esac
 done
 
@@ -54,6 +55,10 @@ if [[ "$grapher" ]]; then
 	for revisionl in $revisions; do
 		for revisionr in $revisions; do
 			if [[ $revisionl -lt $revisionr ]]; then
+				if [[ "$diff" ]]; then
+					echo "Dumping source diff for revisions-range $revisionl..$revisionr"
+					git diff "$revisionl..$revisionr" > ${diff_prefix}diff-$revisionl..$revisionr.diff
+				fi
 				for script in $scripts; do
 					echo "Graphing script $script results for revisions $revisionl vs. $revisionr"
 					$grapher $script $revisionl $revisionr
