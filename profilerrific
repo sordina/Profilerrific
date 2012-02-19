@@ -26,11 +26,12 @@ done
 
 current_revision=`git show | head -n 1 | sed -e 's/.* //'`
 
-echo "Current revision is $current_revision"
+echo "Current revision: $current_revision"
 
 if [[ "$revisions" ]]; then echo "Revisions: $revisions"; fi
 if [[ "$scripts" ]];   then echo "Scripts:   $scripts";   fi
 
+# Run the scripts for each revision
 for revision in $revisions; do
 	git checkout $revision
 	for script in $scripts; do
@@ -38,14 +39,17 @@ for revision in $revisions; do
 	done
 done
 
+# Run the scripts even if no revisions are supplied
 if [[ ! "$revisions" ]]; then
 	for script in $scripts; do
 		$script
 	done
 fi
 
+# Bring the WC back to where we left off
 git checkout $current_revision
 
+# Graph each revision pair
 if [[ "$grapher" ]]; then
 	for revisionl in $revisions; do
 		for revisionr in $revisions; do
