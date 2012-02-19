@@ -24,7 +24,7 @@ while [[ "$@" ]]; do
 	esac
 done
 
-current_revision=`git show | head -n 1 | sed -e 's/.* //'`
+current_revision=`git rev-parse --short HEAD`
 
 echo "Current revision: $current_revision"
 
