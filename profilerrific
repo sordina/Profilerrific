@@ -57,7 +57,7 @@ for revisionl in $revisions; do
 			# Output a diff of each pair
 			if [[ "$diff" ]]; then
 				echo "Dumping source diff for revisions-range $revisionl..$revisionr"
-				git diff "$revisionl..$revisionr" > ${diff_prefix}diff-$revisionl..$revisionr.diff
+				git diff --no-color "$revisionl..$revisionr" > ${diff_prefix}diff-$revisionl..$revisionr.diff
 			fi
 
 			# Graph each revision pair
