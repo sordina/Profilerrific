@@ -33,7 +33,7 @@ if [[ "$scripts" ]];   then echo "Scripts:   $scripts";   fi
 
 # Run the scripts for each revision
 for revision in $revisions; do
-	git checkout $revision
+	git reset --hard $revision
 	for script in $scripts; do
 		$script
 	done
@@ -47,7 +47,7 @@ if [[ ! "$revisions" ]]; then
 fi
 
 # Bring the WC back to where we left off
-git checkout $current_revision
+git reset --hard $current_revision
 
 # Graph each revision pair
 if [[ "$grapher" ]]; then
