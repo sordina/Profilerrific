@@ -30,7 +30,7 @@ if [[ "$revisions" ]]; then echo "Revisions: $revisions"; fi
 if [[ "$scripts" ]];   then echo "Scripts:   $scripts";   fi
 
 for revision in $revisions; do
-	git checkout -- $revision
+	git checkout $revision
 	for script in $scripts; do
 		$script
 	done
@@ -41,6 +41,8 @@ if [[ ! "$revisions" ]]; then
 		$script
 	done
 fi
+
+git checkout $current_revision
 
 if [[ "$grapher" ]]; then
 	for revisionl in $revisions; do
