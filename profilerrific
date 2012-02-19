@@ -24,8 +24,10 @@ while [[ "$@" ]]; do
 	esac
 done
 
-echo "Revisions: $revisions"
-echo "Scripts:   $scripts"
+current_revision=``
+
+if [[ "$revisions" ]]; then echo "Revisions: $revisions"; fi
+if [[ "$scripts" ]];   then echo "Scripts:   $scripts";   fi
 
 for revision in $revisions; do
 	git checkout -- $revision
