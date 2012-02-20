@@ -36,14 +36,14 @@ if [[ "$scripts" ]];   then echo "Scripts:   $scripts";   fi
 for revision in $revisions; do
 	git reset --hard $revision --
 	for script in $scripts; do
-		$script
+		$script $revision
 	done
 done
 
 # Run the scripts even if no revisions are supplied
 if [[ ! "$revisions" ]]; then
 	for script in $scripts; do
-		$script
+		$script $current_revision
 	done
 fi
 
