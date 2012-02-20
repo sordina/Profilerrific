@@ -1,7 +1,13 @@
 #!/bin/sh
 
 function usage {
-	echo "Usage: profilerrific [-h|--help] [(-s|--scripts) <script>+] [(-r|--revisions) <revision>+] [(-d|--diff) prefix] [(-g|--grapher) <graphing script>]"
+  echo "Usage: profilerrific"
+  echo "   -n --name name"
+  echo "  [-h --help                   ]"
+  echo "  [-s --scripts   script   ... ]"
+  echo "  [-r --revisions revision ... ]"
+  echo "  [-d --diff      prefix       ]"
+  echo "  [-g --grapher   script       ]"
 }
 
 function tidy {
@@ -9,7 +15,7 @@ function tidy {
 }
 
 if [[ ! "$*" ]]; then
-	usage;
+	usage
 	exit
 fi
 
@@ -18,12 +24,19 @@ while [[ "$@" ]]; do
 	shift
 	case "$ARG" in
 	-h|--help)      usage; break;;
+	-n|--name)      name=`     tidy "$@"`;;
 	-r|--revisions) revisions=`tidy "$@"`;;
 	-s|--scripts)   scripts=`  tidy "$@"`;;
 	-g|--grapher)   grapher=`  tidy "$@"`;;
 	-d|--diff)      diff="true"; diff_prefix=`tidy "$@"`;;
 	esac
 done
+
+if [[ ! "$name" ]]; then
+	echo "Missing profile name"
+	usage
+	exit 1
+fi
 
 current_revision=`git rev-parse --short HEAD`
 
@@ -36,14 +49,14 @@ if [[ "$scripts" ]];   then echo "Scripts:   $scripts";   fi
 for revision in $revisions; do
 	git reset --hard $revision --
 	for script in $scripts; do
-		$script $revision
+		$script $name $revision
 	done
 done
 
 # Run the scripts even if no revisions are supplied
 if [[ ! "$revisions" ]]; then
 	for script in $scripts; do
-		$script $current_revision
+		$script $name $current_revision
 	done
 fi
 
@@ -64,7 +77,7 @@ for revisionl in $revisions; do
 			if [[ "$grapher" ]]; then
 				for script in $scripts; do
 					echo "Graphing script $script results for revisions $revisionl vs. $revisionr"
-					$grapher $script $revisionl $revisionr
+					$grapher $name $script $revisionl $revisionr
 				done
 			fi
 		fi

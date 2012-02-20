@@ -9,13 +9,14 @@ Synopsis: Often you may wish to profile several incompatible algorithm designs
           results with links to diffs between each revision.
 
 Usage: profilerrific
-          [-h|--help]
-          [(-s|--scripts) <script>+]
-          [(-r|--revisions) <revision>+]
-          [(-d|--diff) <prefix>]
-          [(-g|--grapher) <grapher script>]
+          [-h --help                    ]
+          [-s --scripts   script   ...  ]
+          [-r --revisions revision ...  ]
+          [-d --diff      prefix        ]
+          [-g --grapher   script        ]
 
 Options:
+  -n --name      - Name to label this profile with
   -h --help      - Show usage information
   -s --scripts   - List of scripts to perform profiling with
   -r --revisions - List of revision choices to profile
