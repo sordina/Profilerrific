@@ -77,7 +77,7 @@ for revisionl in $revisions; do
 			if [[ "$grapher" ]]; then
 				for script in $scripts; do
 					echo "Graphing script $script results for revisions $revisionl vs. $revisionr"
-					$grapher $name $script $revisionl $revisionr
+					$grapher "$name" "$script" "$revisionl" "$revisionr"
 				done
 			fi
 		fi
